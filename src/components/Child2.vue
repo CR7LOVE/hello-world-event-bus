@@ -1,19 +1,20 @@
 <template>
     <div>
-        <button @click="onChildClick">
-            child
+        <button>
+            Child2
         </button>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Child",
+        name: "Child2",
         mounted() {
+            this.registerInFather();
         },
         methods: {
-            onChildClick() {
-                this.$parent.$emit('xxxxx', '兄弟组件通信呢');
+            registerInFather() {
+                this.$parent.$on('xxxxx', console.log);
             }
         }
     }
