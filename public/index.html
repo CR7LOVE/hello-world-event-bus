@@ -14,5 +14,15 @@
     <div id="app"></div>
     <script src="EventEmiiter.js"></script>
     <!-- built files will be auto injected -->
+
+    <script>
+      const handleClick1 = () => console.log('click1');
+      const handleClick2 = () => console.log('click2');
+      document.addEventListener('click', handleClick1);
+      document.addEventListener('click', handleClick2);
+
+      document.removeEventListener('click', handleClick1);
+      document.removeEventListener('click', handleClick2);
+    </script>
   </body>
 </html>
