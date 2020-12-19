@@ -2,6 +2,7 @@ class EventEmitter {
     constructor() {
         this.events = {};
     }
+
     // 实现订阅
     on(type, callBack) {
         if (!this.events) this.events = Object.create(null);
@@ -12,17 +13,26 @@ class EventEmitter {
             this.events[type].push(callBack);
         }
     }
+
     // 删除订阅
     off(type, callBack) {
-        if (!this.events[type]) return;
-        if (!callBack) {
+        if (!type) { // 没传 type 的话，恢复成最初
+            this.events = {};
+            return;
+        }
+
+        if (!this.events[type]) return; // 异常判断
+
+        if (!callBack) { // 不传 callBack 的话，此 type 恢复成最初
             this.events[type] = [];
             return;
         }
+
         this.events[type] = this.events[type].filter(item => {
             return item !== callBack;
         });
     }
+
     // 只执行一次订阅事件
     once(type, callBack) {
         function fn(...args) {
@@ -31,6 +41,7 @@ class EventEmitter {
         }
         this.on(type, fn);
     }
+
     // 触发事件
     emit(type, ...rest) {
         this.events[type] &&
@@ -89,3 +100,11 @@ event.off("click4");
 event.emit("click4", 5,6); // 全没了
 console.log('====================');
 
+// 四. on 多次，取消所有
+event.on("click5", handle);
+event.on("click6", handle);
+event.emit("click5", '多次');
+event.emit("click6", '多次2');
+event.off();
+event.emit("click5", '多次'); // 不应该打印
+event.emit("click6", '多次2'); // 不应该打印
