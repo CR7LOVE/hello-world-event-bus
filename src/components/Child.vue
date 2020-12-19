@@ -16,10 +16,11 @@
         methods: {
             registerOnce() {
                 EventBus.$on('aa', console.log);
+                console.log('EventBus--methods',EventBus._events);
             }
         },
         destroyed() {
-            console.log('EventBus',EventBus)
+            console.log('EventBus--destroy',EventBus._events);
         }
     }
 </script>
