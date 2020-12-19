@@ -1,12 +1,14 @@
 <template>
     <div>
-        <button @click="isSeen=!isSeen">show child</button>
-        <child @xxxxx="onChild" v-if="isSeen"/>
+        <button @click="isSeen=!isSeen">toggle child</button>
+        <child v-if="isSeen"/>
+        <button @click="onChildClick">emit</button>
     </div>
 </template>
 
 <script>
     import Child from "./Child";
+    import EventBus from "../utils/EventBus";
 
     export default {
         components: {
@@ -19,9 +21,9 @@
             }
         },
         methods: {
-            onChild(msg) {
-                console.log(msg);
+            onChildClick() {
+                EventBus.$emit('aa', '开始用 export 的 EventBus 了')
             }
-        },
+        }
     }
 </script>
