@@ -1,19 +1,27 @@
 <template>
     <div>
-        <child/>
-        <child2/>
+        <button @click="isSeen=!isSeen">show child</button>
+        <child @xxxxx="onChild" v-if="isSeen"/>
     </div>
 </template>
 
 <script>
     import Child from "./Child";
-    import Child2 from "./Child2";
 
     export default {
         components: {
             Child,
-            Child2
         },
         name: 'HelloWorld',
+        data() {
+            return {
+                isSeen: true
+            }
+        },
+        methods: {
+            onChild(msg) {
+                console.log(msg);
+            }
+        },
     }
 </script>

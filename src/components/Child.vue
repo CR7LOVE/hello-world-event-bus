@@ -13,7 +13,7 @@
         },
         methods: {
             onChildClick() {
-                this.$parent.$emit('xxxxx', '兄弟组件通信呢');
+                this.$emit('xxxxx', '给父组件');
             }
         }
     }
